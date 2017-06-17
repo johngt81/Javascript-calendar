@@ -1,0 +1,23 @@
+
+.weekday a{
+   background-color : lightgreen !important;
+   background-image :none !important;
+}
+
+.weekend a{
+   background-color : yellow !important;
+   background-image :none !important;
+}
+
+.holiday a{
+   background-color : orange !important;
+   background-image :none !important;
+}
+
+.invalid span{
+    color: transparent !important;
+}
+
+.invalid td{
+    background-color: grey !important;
+}
