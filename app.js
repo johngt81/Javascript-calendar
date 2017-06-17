@@ -8,9 +8,9 @@ $(document).ready(function () {
         var end_date = moment(start_date, "MM/DD/YYYY").add('days', days);
         var country_code = $("#countryCode").val(); 
         
-        if (!isValid(days, start_date, country_code)) return;
-
         clearResults();
+        
+        if (!isValid(days, start_date, country_code)) return;
 
         getHolidays(country_code)
             .done(function(data){
@@ -37,7 +37,7 @@ $(document).ready(function () {
         var message = "";
         if (!days || isNaN(days) || days < 1) message = "You must enter a valid number of days\n";
         if (!start_date) message += "You must select a start date\n";
-        if (!country_code) message += "You must enter a country code";
+        if (!country_code || getSupportedCountryCodes().indexOf(country_code.toUpperCase()) < 0) message += "You must enter a country code";
         if (message.length > 0){
             alert(message);
             return false;
@@ -71,13 +71,13 @@ $(document).ready(function () {
                 if (moment(date).isBetween(startDate, endDate, 'day', '[)')) {
                     if (isHoliday(date, holidays)){
                         var holiday = holidays[moment(date).format("YYYY-MM-DD")];
-                        return [true, "holiday", holiday[0].name]; //orange
+                        return [true, "holiday", holiday[0].name];
                     }
                     if (isWeekend(date))
-                        return [true, "weekend", '']; //yellow
-                    return [true, "weekday", '']; //green olive
+                        return [true, "weekend", ''];
+                    return [true, "weekday", ''];
                 }
-                return [false, 'invalid', ''];//gray
+                return [false, 'invalid', ''];
             }
         };
     }
@@ -90,5 +90,12 @@ $(document).ready(function () {
     function isWeekend(currentDate) {
         var day = moment(currentDate).day();
         return day == 0 || day == 6;
+    }
+
+    function getSupportedCountryCodes(){
+        return ["AR","BG", "BO", "BR", "CA", "CH",
+         "CN", "CO", "EC", "ES", "FR", "GB", 
+         "IT", "JP", "MX", "NL", "PE", "PR",
+         "PT", "PY", "RU", "US", "UY", "VE"];
     }
 });
