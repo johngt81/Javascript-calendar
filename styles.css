@@ -21,3 +21,7 @@
 .invalid td{
     background-color: grey !important;
 }
+
+.ui-state-active {
+    color: #3f3731 !important;
+}
