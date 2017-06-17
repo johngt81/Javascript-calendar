@@ -37,7 +37,7 @@ $(document).ready(function () {
         var message = "";
         if (!days || isNaN(days) || days < 1) message = "You must enter a valid number of days\n";
         if (!start_date) message += "You must select a start date\n";
-        if (!country_code || getSupportedCountryCodes().indexOf(country_code.toUpperCase()) < 0) message += "You must enter a country code";
+        if (!country_code || getSupportedCountryCodes().indexOf(country_code.toUpperCase()) < 0) message += "You must enter a valid country code";
         if (message.length > 0){
             alert(message);
             return false;
